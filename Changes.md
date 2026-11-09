@@ -27,7 +27,7 @@ The five components in `src/components/dashboard/` are specific to the FocusForg
 
 ## Walkthrough video
 
-The accompanying walkthrough explicitly covers the original `DashboardPage.jsx` layout problem, why the background and content wrappers belong in `DashboardLayout.jsx` and `DashboardContent.jsx`, how the page now acts as a state owner and composer, and why `dashboard/` is separated from `shared/`. The final MP4 is published at the Google Drive link included with this submission.
+The accompanying walkthrough explicitly covers the original `DashboardPage.jsx` layout problem, why the background and content wrappers belong in `DashboardLayout.jsx` and `DashboardContent.jsx`, how the page now acts as a state owner and composer, and why `dashboard/` is separated from `shared/`. The final MP4 is published here: <https://drive.google.com/file/d/1yqY33vZmzdwDonwwa44oqhjPIgKfOSdo/view>.
 
 ## Larger-scale considerations
 
