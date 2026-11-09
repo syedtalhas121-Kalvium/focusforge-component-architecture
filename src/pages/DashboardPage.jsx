@@ -1,6 +1,9 @@
 import { useState } from "react";
 import AddTaskInput from "../components/dashboard/AddTaskInput";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
+import DashboardLayout, {
+  DashboardContent,
+} from "../components/dashboard/DashboardLayout";
 import StatsRow from "../components/dashboard/StatsRow";
 import TaskFilterBar from "../components/dashboard/TaskFilterBar";
 import TaskList from "../components/dashboard/TaskList";
@@ -56,16 +59,9 @@ export default function DashboardPage() {
     totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#0f0f1a",
-        color: "#e2e8f0",
-        fontFamily: "sans-serif",
-      }}
-    >
+    <DashboardLayout>
       <DashboardHeader />
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 24px" }}>
+      <DashboardContent>
         <StatsRow
           totalCount={totalCount}
           completedCount={completedCount}
@@ -88,8 +84,7 @@ export default function DashboardPage() {
           onToggleTask={toggleTask}
           onDeleteTask={deleteTask}
         />
-      </div>
-    </div>
+      </DashboardContent>
+    </DashboardLayout>
   );
 }
-

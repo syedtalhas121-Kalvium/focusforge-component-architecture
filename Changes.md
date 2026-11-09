@@ -2,13 +2,14 @@
 
 ## Refactor summary
 
-`DashboardPage.jsx` originally combined all page state, derived task calculations, event handlers, and the complete visual layout in a single monolithic component. The refactor keeps the behavior and inline visual styling unchanged while making the page the state owner and composer. It now contains only state declarations, values derived from state, handlers that update state, and a readable component tree.
+`DashboardPage.jsx` originally combined all page state, derived task calculations, event handlers, and the complete visual layout in a single monolithic component. The refactor keeps the behavior and inline visual styling unchanged while making the page the state owner and composer. It now contains only state declarations, values derived from state, handlers that update state, and a readable component tree. The remaining raw page wrappers were also extracted into `DashboardLayout.jsx` and `DashboardContent.jsx`, so the page no longer owns the background or centered content-container layout.
 
 ## Component responsibilities
 
 | Component | Location | Responsibility | Props |
 | --- | --- | --- | --- |
 | `DashboardHeader` | `src/components/dashboard/` | Renders the FocusForge brand, greeting, and user avatar for the dashboard header. | None; the header is page-specific and currently has no dynamic data. |
+| `DashboardLayout` / `DashboardContent` | `src/components/dashboard/` | Own the page-level background and centered content-container layout that used to be inline in `DashboardPage.jsx`. | `children`. |
 | `StatsRow` | `src/components/dashboard/` | Arranges the four dashboard metrics and passes each metric’s values to `StatCard`. | `totalCount`, `completedCount`, `remainingCount`, and `progressPercent`. |
 | `AddTaskInput` | `src/components/dashboard/` | Renders the controlled task input and triggers task creation on button click or Enter. | `value`, `onChange`, and `onAdd`. |
 | `TaskFilterBar` | `src/components/dashboard/` | Renders the filter buttons and controlled task search field. | `filter`, `onFilterChange`, `searchQuery`, and `onSearchChange`. |
@@ -22,7 +23,11 @@ The five components in `src/components/dashboard/` are specific to the FocusForg
 
 ## State and data flow
 
-`DashboardPage` remains the single state owner for the task list, draft task title, selected filter, and search query. It derives the filtered task list and summary counts, then passes the smallest practical prop contract to each child. Children report user actions through callbacks rather than mutating state themselves.
+`DashboardPage` remains the single state owner for the task list, draft task title, selected filter, and search query. It derives the filtered task list and summary counts, then passes the smallest practical prop contract to each child. Children report user actions through callbacks rather than mutating state themselves. Its return value is composition only: `DashboardLayout`, `DashboardHeader`, `DashboardContent`, `StatsRow`, `AddTaskInput`, `TaskFilterBar`, and `TaskList`.
+
+## Walkthrough video
+
+The accompanying walkthrough explicitly covers the original `DashboardPage.jsx` layout problem, why the background and content wrappers belong in `DashboardLayout.jsx` and `DashboardContent.jsx`, how the page now acts as a state owner and composer, and why `dashboard/` is separated from `shared/`. The final MP4 is published at the Google Drive link included with this submission.
 
 ## Larger-scale considerations
 
